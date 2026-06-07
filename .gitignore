@@ -1,0 +1,22 @@
+# Build
+build/
+dist/
+target/
+out/
+
+# Java
+*.class
+*.jar
+
+# NetBeans
+nbproject/
+build.xml
+manifest.mf
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
