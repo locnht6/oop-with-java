@@ -1,12 +1,36 @@
 package varnfunc;
 
+import java.util.Scanner;
+
 public class VarNFunc {
 
     public static void main(String[] args) {
         //playWithVariables();
         //playWithIntegers();
         //playWithDoubles();
-        playWithCharacters();
+        //playWithCharacters();
+        //playWithBooleans();
+        //printIntegerList();
+        //printIntegerList(20);
+        //inputFromKeyboard();
+        //int x = getAnInteger();
+        //System.out.println("x from keyboard: " + x);
+        
+        // In từ 1...x
+        //printIntegerList(x); // pass by value, truyền tham trị.
+        
+        //testMathFunctions();
+        
+        int n = getAnInteger();
+        if (isPrime(n))
+            System.out.println(n + " is prime.");
+        else
+            System.out.println(n + " is not prime.");
+        
+        printPrimeList();
+        print20FirstPrimeList();
+        solve();
+        
     }
     
     // static chỉ chơi với static.
@@ -70,4 +94,126 @@ public class VarNFunc {
         System.out.println("my name as in a lowercase: " + name.toLowerCase());
     }
     
+    // Một biểu thức so sánh, một mệnh đề, câu phát biểu sẽ rơi vào 2 trạng thái: đúng - sai.
+    // C: đúng là 1, sai là 0 => kiểu int.
+    // Java: đúng là true, sai là false => kiểu boolean.
+    public static void playWithBooleans() {
+        boolean marriedStatus = false;
+        if (marriedStatus == true)
+            System.out.println("Đánh đồn có địch mới vui");
+        else
+            System.out.println("Vườn hồng có lối nhưng chưa ai vào.");
+        
+        System.out.println("Luôn có hi vọng");
+    }
+    
+    // In ra các số nguyên từ 1...100
+    public static void printIntegerList() {
+        System.out.println("The list of 100 first integers: ");
+        System.out.println("1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 ...");
+        
+        for (int i = 1; i <= 100; i++) {
+            System.out.print(i + " ");
+        }
+        System.out.println();       
+    }
+    
+    // In các số tự nhiên từ 1...n
+    // Hiện tượng trong 1 class bất kì mà có 2 hàm trùng tên nhau, nhưng khác phần tham số đầu vào,
+    // mà khác trên data type, không quan tâm tên biến,
+    // hiện tượng này được gọi là OVERLOAD/OVERLOADDING - quá tải hàm.
+    public static void printIntegerList(int n) {
+        System.out.println("The list of " + n + " first integers:");
+        for (int i = 1; i <= n; i++) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+    
+    public static void inputFromKeyboard() {
+        int yob;        
+        Scanner banPhimCuaTui = new Scanner(System.in);
+        
+        System.out.print("Please input your year of birth: ");
+        yob = banPhimCuaTui.nextInt(); // float r = sqrt(4);
+        
+        System.out.println("yob: " + yob);
+    }
+    
+    public static int getAnInteger() {
+        int n;       
+        Scanner banPhimCuaTui = new Scanner(System.in);
+        
+        System.out.print("Please input a positive integer: ");
+        n = banPhimCuaTui.nextInt();
+        
+        return n;
+    }
+    
+    public static void testMathFunctions() {
+        double result = Math.sqrt(25);
+        System.out.println("result: " + result);
+        System.out.println(Math.sqrt(100));
+    }
+    
+    // Kiểm tra 1 số có phải nguyên tố hay không?
+    public static boolean isPrime(int n) {
+        if (n <= 1)
+            return false;
+        else if (n == 2)
+            return true;
+        else {
+            for (int i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i == 0)
+                    return false;
+            }
+            return true;
+        }        
+    }
+    
+    // In ra các số nguyên tố trong đoạn từ 1...1000
+    public static void printPrimeList() {
+        System.out.println("The prime list from 1 to 1000: ");
+        for (int i = 1; i <= 1000; i++) {
+            if (isPrime(i))
+                System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+    
+    // Viết hàm in ra 1000 số nguyên tố đầu tiên
+    public static void print20FirstPrimeList() {
+        System.out.println("The 20 first prime list: ");
+        int count = 0;
+        for (int i = 1; count < 20; i++) {
+            if (isPrime(i)) {
+                System.out.print(i + " ");
+                count++;
+            }
+        }
+        System.out.println("");
+    }
+    
+    // Viết hàm nhập vào từ bàn phím 2 hệ số a b đại diện cho phương trình bậc 1
+    // ax + b = 0
+    // In ra nghiệm phương trình này
+    public static void solve() {
+        double a, b;
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Please input a: ");
+        a = sc.nextDouble();
+        System.out.print("Please input b: ");
+        b = sc.nextDouble();
+        
+        System.out.println(a + "x + " + b + " = 0");
+        if (a == 0 && b == 0)
+            System.out.println("x là mọi giá trị.");
+        else if (a == 0 && b != 0)
+            System.out.println("x vô nghiệm.");
+        else if (a != 0 && b == 0)
+            System.out.println("x = 0");
+        else
+            System.out.println("x = " + (-b / a));
+    }
 }
