@@ -11,6 +11,8 @@ public class DogManagement {
         
         Dog         chiHu           = new Dog("CHI HU HU", 2021, 0.5);
     // data type  tên biến object       phức tạp, object
+                                      // malloc() calloc()
+                                      // memory allocation
         
         // có bao nhiêu data types? 2: primitive, object.
         
@@ -28,6 +30,16 @@ public class DogManagement {
         System.out.println("x: " + x);
         x = 79;
         System.out.println("x again: " + x);
+        
+        // Ăn nhiều thì ú
+        chiHu.updateWeight(5.0);
+        System.out.println("After online course");
+        chiHu.bark();
+        ngaoDa.bark();
+        
+        int chiHuYob = chiHu.getYob();
+        System.out.println("CH YOB: " + chiHuYob);
+        System.out.println("NĐ YOB: " + ngaoDa.getYob());
     }
     
 }

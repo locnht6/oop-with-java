@@ -40,4 +40,21 @@ public class Dog {
         System.out.printf("|GOGO|%-10s|%4d|%4.1f|\n", name, yob, weight);
     }
     
+    public void updateWeight(double newWeight) {
+        weight = newWeight;
+    }
+    
+    // Giống câu chuyện hỏi ai đó info.
+    // Cho tôi biết năm sinh của bạn, bạn.namSinh
+    // bạn.getNamSinh() - bạn lấy năm sinh của bạn đưa cho tôi.
+    public int getYob() {
+        return yob;
+    }
+    
 }
+
+// KĨ THUẬT ĐÓNG GÓI/GOM ĐẶC TÍNH, VÀ HÀNH VI XỬ LÍ ĐẶC TÍNH ĐÓ HÌNH THÀNH NÊN 1 OBJECT RIÊNG BIỆT,
+// KĨ THUẬT CÔ LẬP HÀM VÀ BIẾN VÀO 1 KHU VỰC (OBJECT, CLASS)
+// TẠO THÀNH 1 THỰC THỂ HOẠT ĐỘNG RIÊNG BIỆT, CÓ ĐẶC ĐIỂM LUÔN,
+// KĨ THUẬT GÓI MỌI THỨ LẠI THÀNH 1 ĐƠN VỊ (OBJECT) ĐƯỢC GỌI LÀ ENCAPSULATION.
+// OOP: ENCAPSULATION/ABSTRACTION/INHERITANCE/POLYMORPHISM.
