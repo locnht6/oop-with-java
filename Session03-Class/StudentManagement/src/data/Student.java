@@ -1,9 +1,10 @@
 package data;
 
 public class Student {
-    private String id;   
-    private String name;
-    private int yob;
+    private static String id;   
+    public static String name;
+    
+    public int yob;
     private double gpa;
 
     public Student(String id, String name, int yob, double gpa) {
@@ -53,6 +54,15 @@ public class Student {
     // gáy điểm
     public void showProfile() {
         System.out.printf("|%8s|%-25s|%4d|%4.1f|\n", id, name, yob, gpa);
+    } // non-static chơi với ai? chơi với non-static là rõ ràng, vì cùng object,
+      // chơi với cả static vì là 1 phần chung được tách ra.
+    
+    // chơi hàm static xem sao
+    public static void sayHi() {
+        System.out.println("Hi everyone, my name is: " + name);
+        //System.out.println("Hi everyone, my yob is: " + yob);
+        // Không biết yob nào để mà in vì clone nhiều yob quá, vì nhiều SV
+        // static chỉ chơi với staitc vì cùng khu vực.
     }
     
 }
