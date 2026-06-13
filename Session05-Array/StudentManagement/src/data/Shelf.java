@@ -25,6 +25,10 @@ public class Shelf {
         this.color = color;
         this.label = label;
     }
+    
+    // DATA + HÀM XỬ LÍ CỦA TỦ NHÂN CÁCH HÓA, TOÀN BỘ SẼ LÀ NON-STATIC,
+    // NẾU KHÔNG CÁC TRƯỜNG ĐẠI HỌC, BỘ MÔN XÀI CHUNG DANH SÁCH SINH VIÊN LÀ TOANG,
+    // ĐỒ ĐẠC, HÀNH XỬ PHẢI THUỘC VỀ OBJECT.
 
     public void inputAStudent() {
 
@@ -33,7 +37,7 @@ public class Shelf {
         double gpa;
         System.out.println("Input student #" + (count + 1) + "/" + ds.length);
         System.out.print("Input id: ");
-        id = sc.nextLine();
+        id = sc.nextLine(); // TODO: kiểm tra id trùng
 
         System.out.print("Input name: ");
         name = sc.nextLine();
@@ -46,6 +50,7 @@ public class Shelf {
         
         ds[count] = new Student(id, name, yob, gpa);
         count++;
+        System.out.println("Add student successfully!");
         
     }
     
@@ -55,6 +60,34 @@ public class Shelf {
         for (int i = 0; i < count; i++) {
             ds[i].showProfile(); // for hết là toang!!!
         }
+        
+    }
+    
+    public void searchAStudent() {
+        
+        // search là quét/duyệt/đi từ trái sang phải lôi cổ từng SV[i] ra,
+        // hỏi hắn mã số mày là mấy?
+        // so sánh với mã số muốn tìm? nếu == mã số of SV[i] SV[i].getId() báo tìm thấy,
+        // còn tìm hết không thấy thì báo rằng not found.
+        // THUẬT TOÁN TRÂU BÒ/VÉT CẠN/TÁT CẠN.
+        String id;
+        
+        System.out.print("Input the id that you want to search: ");
+        id = sc.nextLine();
+        
+        for (int i = 0; i < count; i++) { // đi đến chỗ đổ cuối cùng thôi heng.
+            if (ds[i].getId().equalsIgnoreCase(id)) {
+                // tìm thấy tại vị trí [i].
+                System.out.println("Student found!!! Here she/he is");
+                ds[i].showProfile(); // in kết quả liền.
+                return; // tìm thấy thì dừng hàm luôn, không for gì nữa.
+            }
+        }
+        
+        // Sống sót đến đây, sure, không có thấy id cần tìm, nếu thấy đã dừng sớm ở trên rồi,
+        // đi hết for mà không thoát được, báo không thấy.
+        System.out.println("Student not found!!!");
+        // Dùng biến flag phất cờ nếu thấy và không, if () in ra câu gì.
         
     }
  
