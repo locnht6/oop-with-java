@@ -270,16 +270,38 @@ public class BasicArray {
         
         Student arr[] = new Student[2];
         arr[0] = new Student("SE123456", "AN NGUYỄN", 2001, 4.0);
-        arr[1] = new Student("SE123457", "BÌNH LÊ", 2000, 8.0);
+        arr[1] = new Student("SE123457", "BÌNH LÊ", 2000, 10.0);
         
         System.out.println("The student list before sorting");
         for (Student x : arr) {
             x.showProfile();
         }
         
-        Student t = arr[0];
-        arr[0] = arr[1];
-        arr[1] = t;
+        // SẮP XẾP MẢNG OBJECT - mảng của các biến object mà trỏ vào object,
+        // chẳng qua là đổi vị trí trỏ, thay đổi value/tọa độ vùng object
+        // mà đang được lưu trong các biến con trỏ,
+        // đổi cách trỏ của từng biến mảng, chơi biến trung gian,
+        // khi nào thì đổi, nhắm mắt lại đổi là sai.
+        // Giả bộ sắp xếp tăng dần của gpa,
+        // nếu thứ tự trỏ vùng new đã đúng thứ tự điểm thì để im,
+        // nếu điểm của arr[0] đang trỏ > điểm của arr[1] đang trỏ thì mới đổi.
+        
+        // CHỐT HẠ: CẤM TUYỆT ĐỐI XÀI > >= < <= == != CHO VIỆC SO SÁNH 2 BIẾN OBJECT,
+        // VÌ CÁC TOÁN TỬ SO SÁNH TRUYỀN THỐNG CHỈ DÀNH CHO PRIMITIVE,
+        // int a = 5, b = 10; if (a > b) vì 2 giá trị, so sánh được.
+        // arr[0] [1] bản chất trong ram nó là tọa độ, là con số luôn, hàm ý là địa chỉ vùng ram,
+        // đi so sánh 2 biến object arr[0] [1] tương đương so sánh tọa độ, số nhà,
+        // nhà tao số nhà 500 đường Quang Trung, Gò Vấp,
+        // nhà mày số nhà 2 đường Lê Lợi, quận 1,
+        // số nhà tao to hơn 250 lần số nhà mày, vô nghĩa vãi.
+        // Hãy so sánh giùm tui 2 SV An và Bình,
+        // SV1 so sánh SV2 là vô nghĩa vì lúc thắng lúc thua theo data bên trong.
+        if (arr[0].getGpa() > arr[1].getGpa()) {
+            Student t = arr[0];
+            arr[0] = arr[1];
+            arr[1] = t;
+        }
+        
         System.out.println("The student list after sorting ascending by gpa");
         for (Student x : arr) {
             x.showProfile();
