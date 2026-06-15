@@ -29,7 +29,7 @@ package data;
 
 public class Rectangle extends Shape {
     
-    private double a, b; // width, length.
+    protected double a, b; // width, length.
 
     public Rectangle(String owner, String color, String borderColor, double a, double b) {
         super(owner, color, borderColor);
@@ -69,7 +69,7 @@ public class Rectangle extends Shape {
 
     @Override
     public void paint() {
-        System.out.printf("|%-10s|%-10s|%-10s|%-10s|%4.1f|%4.1f|%7.2f|\n", "RECTANGLE", owner, color, borderColor, a, b, getArea());
+        System.out.printf("|%-10s|%-10s|%-10s|%-10s|%4.1f|%4.1f| -- |%7.2f|\n", "RECTANGLE", owner, color, borderColor, a, b, getArea());
     }
     
 }

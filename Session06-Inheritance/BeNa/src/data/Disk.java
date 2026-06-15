@@ -41,7 +41,7 @@ public class Disk extends Shape {
     
     @Override
     public void paint() {
-        System.out.printf("|%-10s|%-10s|%-10s|%-10s|%-4s|%4.1f|%7.2f|\n", "DISK", owner, color, borderColor, smile, radius, getArea());
+        System.out.printf("|%-10s|%-10s|%-10s|%-10s|%-4s|%4.1f| -- |%7.2f|\n", "DISK", owner, color, borderColor, smile, radius, getArea());
     }
     
 }
