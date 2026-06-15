@@ -5,11 +5,15 @@ package data;
 // tương đồng: Con của Ba Má,
 // ta đang nói về cái Khuôn Tổ mà sinh ra nhiều Khuôn khác,
 // Shape đại diện, Cha của đám Vuông, Tròn, Chữ Nhật, Tam Giác, ...
+// MỘT CLASS CHỨA HÀM ABSTRACT TỨC LÀ HÀM KHÔNG CÓ CODE, TỨC LÀ Ý TƯỞNG CẦN CÓ,
+// THÌ BẢN THÂN CLASS CHƯA HOÀN HẢO, CHƯA HÀNH XỬ ĐƯỢC, GIỐNG NHƯ BẢN CONCEPT,
+// NÓ CHỈ MỚI LÀ Ý TƯỞNG MÀ THÔI, DO ĐÓ NẾU CLASS CHỨA HÀM ABSTRACT THÌ CLASS CŨNG PHẢI LÀ ABSTRACT.
 public abstract class Shape {
     
     // Đặc tính của Cha, Hình Học là gì?
     protected String owner;
     protected String color;
+    protected String borderColor; // màu đường bo cạnh, biên.
     
     //protected double a, b, c, radius; //... bốc mùi,
     // giả sử thằng Con Hình Tròn kế thừa Shape, thế thì nó có cạnh, lúc get() set() xổ ra 1 đống cạnh,
@@ -17,10 +21,11 @@ public abstract class Shape {
     // Cha mà có nhiều Con, Cha là nhân tử chung của các Con,
     // chung cho các Con kế thừa, phần dị biệt mỗi đứa thì mỗi đứa giữ.
     // TUYỆT ĐỐI KHÔNG ĐỂ DỊ BIỆT LÊN CHA, DỊ BIỆT CỦA TỪNG ĐỨA CON.
-
-    public Shape(String owner, String color) {
+   
+    public Shape(String owner, String color, String borderColor) {
         this.owner = owner;
         this.color = color;
+        this.borderColor = borderColor;
     }
 
     public String getOwner() {
@@ -37,6 +42,14 @@ public abstract class Shape {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public String getBorderColor() {
+        return borderColor;
+    }
+
+    public void setBorderColor(String borderColor) {
+        this.borderColor = borderColor;
     }
     
     // Hành động tiếp theo, hàm của tui?
@@ -77,5 +90,13 @@ public abstract class Shape {
     // KHÁI NIỆM - ABSTRACT - TÍNH TRỪU TƯỢNG CHÍNH LÀ NÓI VỀ 1 Ý TƯỞNG.
     public abstract double getArea(); // diện tích là khái niệm heng.
     public abstract double getPerimeter(); // ý tưởng đo cạnh heng, từ từ tính, hình nào mà chả có.
+    
+    public abstract void paint();
+    // Vì các thao tác vẽ hình là khác nhau, chưa kể in ra là khác nhau,
+    // chuỗi in ra khác nhau: RECT, SQR, TRG, R.TRG, ...,
+    // diện tích tính toán khác nhau.
+    // Phản biện: viết pain() ở Shape, và em if (TG) thì in TG, if (Hình Tròn) thì in DISK, if ...
+    // Được nhưng mất đi tính linh hoạt dễ mở rộng, thích ứng với mọi loại hình còn tiếp tục được sinh ra sau này.
+    // NGUYÊN LÍ SOLID.
     
 }
