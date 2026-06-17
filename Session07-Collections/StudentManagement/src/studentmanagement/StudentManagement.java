@@ -8,16 +8,70 @@ import java.util.Set;
 
 public class StudentManagement {
 
+//    public static void main(String[] args) {
+//        
+//        //playWithArrayList();
+//        //sortArrayListManually();
+//        //playWithSet();
+//        
+////        Student xxx = searchStudent("se123456");
+////        if (xxx != null) // null được quyền kết hợp với == !=, có trỏ null đáy ram hay không?
+////            xxx.showProfile();
+////        else
+////            System.out.println("Not found!!!");
+//        
+//        sortStudentList();
+//        
+//    }
+        
+//    public static void main(String[] args) {
+//        
+//        List<Student> arr = initData(); // arr ở đây trỏ thẳng vào Túi có 5 SV.
+//        System.out.println("The student list");
+////        for (Student x : arr) {
+////            x.showProfile();
+////        }
+//        for (Student x : initData()) {
+//            x.showProfile();
+//        }
+//        
+//    }
+        
     public static void main(String[] args) {
         
-        //playWithArrayList();
-        //sortArrayListManually();
-        //playWithSet();
-        Student xxx = searchStudent("se123456");
-        if (xxx != null) // null được quyền kết hợp với == !=, có trỏ null đáy ram hay không?
+        List<Student> arr = initData();
+        // 5 9 4 2 8
+        Student xxx = searchAStudent(arr, "se888888");
+        if (xxx == null)
+            System.out.println("Not found!");
+        else { // vi diệu nè
             xxx.showProfile();
-        else
-            System.out.println("Not found!!!");
+            // Nếu tìm thấy, tui sẽ update dữ liệu luôn, sửa điểm của bạn Tám thành 6789.
+            xxx.setGpa(6789);
+        }
+        // In ra kết quả thì biết
+        System.out.println("The student list after updating SE8");
+        for (Student x : arr) {
+            x.showProfile();
+        }
+        
+    }
+    
+    // Hàm chuẩn bị DATA. Hàm trả về 1 cái Túi/ArrayList/Danh sách SV.
+    // Đọc đúng: hàm trả về tọa độ vùng new ArrayList() mà bên trong có sẵn 1 đống cardvisit ghi địa chỉ SV,
+    // hàm trả về vị trí 1 cái túi có sẵn/mua rồi, trong túi có...
+    // List<Student> arr = new gì đó.
+    // initData = new ArrayList() nào đó
+    public static List<Student> initData() {
+        
+        List<Student> arr = new ArrayList<>();
+        arr.add(new Student("SE555555", "NĂM LÊ", 2003, 5.5));
+        arr.add(new Student("SE999999", "CHÍN PHẠM", 2003, 9.9));
+        arr.add(new Student("SE444444", "BỐN VÕ", 2003, 4.4));
+        arr.add(new Student("SE222222", "HAI TRẦN", 2003, 2.2));
+        arr.add(new Student("SE888888", "TÁM LÍ", 2003, 8.8));
+        return arr; // initData() = arr = new ArrayList()
+        // Tên hàm cùng trỏ vào giỏ vừa new - 2 chàng arr, tên hàm cùng trỏ 1 nàng new ArrayList()
         
     }
     
@@ -219,6 +273,86 @@ public class StudentManagement {
         if (tmpId.equalsIgnoreCase(id))
             return tmp; // trả về tọa độ vùng new trong thẻ bài 0.
         
+        return null;
+        
+    }
+ 
+    // CÁC HÀM XỊN SÒ, SORT, SEARCH, CHUẨN BỊ KHO DATA.
+    // 3 HÀM NÀY ĐỀU LÀ STATIC CHO MỤC TIÊU THỬ NGHIỆM, NÓ CHƯA LÀ TƯ DUY OOP.
+    // TƯ DUY OOP LÀ: CÁC HÀM PHẢI NẰM TRONG OBJECT NÀO ĐÓ.
+    // CHẾ TẠO CÁI TỦ, THÙNG CHỨA, CÓ CÁC HÀNH ĐỘNG: THÊM, XÓA, SỬA.
+    public static void sortStudentList() {
+        
+        // Cần chuẩn bị danh sách SV: mua cái Túi - new Túi(), có các hồ sơ SV, new SV()
+        List<Student> arr = new ArrayList<>();
+        arr.add(new Student("SE555555", "NĂM LÊ", 2003, 5.5));
+        arr.add(new Student("SE999999", "CHÍN PHẠM", 2003, 9.9));
+        arr.add(new Student("SE444444", "BỐN VÕ", 2003, 4.4));
+        arr.add(new Student("SE222222", "HAI TRẦN", 2003, 2.2));
+        arr.add(new Student("SE888888", "TÁM LÍ", 2003, 8.8));
+        // Túi đang có chứa thẻ bài, cardvisit, 5 biến con trỏ, tham chiếu,
+        // thông tin trên card chính là địa chỉ vùng new Student() trên HEAP.
+        // Y chang bác sĩ cầm danh sách Excel chứa info các bệnh nhân, bệnh nhân cứ nằm phòng bệnh,
+        // bác sĩ đi thăm sau. Bác sĩ đi thăm, nhìn danh sách, thấy số phòng,
+        // chính là địa chỉ từng bệnh nhân.
+        // Bệnh Nhân 1, Bệnh Nhân 2, Thẻ 1, Thẻ 2, Card 1, Card 2 chính là biến con trỏ, trên đó có địa chỉ object.
+        // ~~~ get(i) - lấy được cái thẻ
+        System.out.println("The student list before sorting ascending by gpa");
+        for (Student x : arr) {
+            // x = arr.get(i); // lấy tọa độ địa chỉ ghi trên thẻ thứ i cất vào x.
+            x.showProfile();
+        }
+        
+        for (int i = 0; i < arr.size() - 1; i++) {
+            for (int j = i + 1; j < arr.size(); j++) {
+                if (arr.get(i).getGpa() > arr.get(j).getGpa()) {
+                    Student t = arr.get(i);
+                    arr.set(i, arr.get(j));
+                    arr.set(j, t);
+                }
+            }
+        }
+        
+        System.out.println("The student list after sorting ascending by gpa");
+        for (int i = 0; i < arr.size(); i++) {
+            arr.get(i).showProfile();
+        }
+        
+    }
+    
+    //            Student x = cần trỏ 1 vùng new SV()
+    // Tên hàm là một biến SV, tên hàm này cần trỏ 1 vùng new SV()
+    // Hàm trả về giá trị thì tên hàm ~~~ giá trị.
+    // double r = sqrt(4);
+    //                                   arr trỏ 1 cái Giỏ có sẵn,
+    //                                   Giỏ ArrayList new ở đâu đó ko care,
+    //                                   trong Giỏ có gì không care vội, lục lọi sau,
+    // Xài hàm này ta cần chuẩn bị sẵn 1 cái Túi/Giỏ ở đâu đó trước rồi,
+    // có đồ bên trong luôn, đưa vị trí Giỏ có sẵn đó vào hàm,
+    // y tá đưa bác sĩ danh sách bệnh nhân nằm sẵn ở các phòng rồi,
+    // đưa mảng/Túi ArrayList có sẵn từ main() vào hàm này - okie.
+    // Nhưng không hay, lập trình là mọi thứ nằm trong hàm -> C.
+    // Mọi hàm nằm trong object -> OOP.
+    // Bài này đang thử nghiệm, ta đưa toàn bộ data vào trong hàm cái đã.
+    public static Student searchAStudent(List<Student> arr, String id) {
+        
+        // Rà qua các phần tử trong mảng, Giỏ, lôi từng thẻ/con trỏ,
+        // hỏi thẻ đó, ê, cho tao biết SV này có id mấy, (i).getId()
+        // trỏ vào new Student()
+        // if (id mới tìm == id cần tìm đưa vào) thì return tọa độ/địa chỉ trên thẻ, cái thẻ.
+        // Nếu không thấy, return null; // tên hàm trỏ vào null, không có SV, chấm bị Exception.
+        // SV không tìm thấy, chấm vô nghĩa!!!
+        // Ta cần danh sách SV, để for,
+        // cần chuẩn bị danh sách SV: mua cái Túi - new Túi(), có các hồ sơ SV, new SV()
+        if (arr.isEmpty()) // đưa Túi rỗng mới mua, có gì đâu mà search
+            return null; // cho mày tọa độ null trả về
+        
+        for (int i = 0; i < arr.size(); i++) {
+            if (arr.get(i).getId().equalsIgnoreCase(id)) {
+                return arr.get(i);
+            }
+        }
+        // đi hết for không return được, sure không thấy, null.
         return null;
         
     }
